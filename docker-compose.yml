@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./images/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - './web/_site:/var/www/html'
+    ports:
+      - 80:80
+  jekyll:
+    build:
+      context: ./images/jekyll
+      dockerfile: Dockerfile
+    volumes:
+      - './web:/data'
+  autopull:
+    build:
+      context: ./autopull
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - './web/:/app/site'
