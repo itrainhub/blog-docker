@@ -2,11 +2,10 @@ version: '3'
 
 services:
   nginx:
-    build:
-      context: ./images/nginx
-      dockerfile: Dockerfile
+    image: nginx
     volumes:
       - './web/_site:/var/www/html'
+      - './images/nginx/conf.d:/etc/nginx/conf.d'
     ports:
       - 80:80
   jekyll:
@@ -17,7 +16,7 @@ services:
       - './web:/data'
   autopull:
     build:
-      context: ./autopull
+      context: ./images/autopull
       dockerfile: Dockerfile
     ports:
       - 9000:9000
